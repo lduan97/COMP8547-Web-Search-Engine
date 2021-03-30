@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import org.tartarus.snowball.ext.englishStemmer;
 
 public class Stemmer {
-	public static ArrayList<String> wordsStemming(ArrayList<String> query) {
+	public ArrayList<String> wordsStemming(ArrayList<String> query) {
+		
 		ArrayList<String> wordsStemming = new ArrayList<>();
 		for (String word : query) {
 			englishStemmer es = new englishStemmer();
@@ -11,5 +12,6 @@ public class Stemmer {
 			wordsStemming.add(es.getCurrent());
 		}
 		return wordsStemming;
+		
 	}
 }

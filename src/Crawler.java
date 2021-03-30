@@ -34,11 +34,13 @@ public class Crawler {
 	public static void getContent() {
 		try {
 			FileWriter link = new FileWriter("URLs.txt");
+			FileWriter page = new FileWriter("Pages.txt");
 			for (String url : urls) {
 				Document document;
 				document = connect(url).timeout(5000).maxBodySize(0).get();
 				String fileName = document.title().replace(" | CBC News", "").replaceAll("[^A-Za-z0-9\\s]", "")
 						+ ".txt";
+				page.write(fileName + System.getProperty("line.separator"));
 				File f = new File("..\\Web Search Engine\\Web Pages\\" + fileName);
 				f.getParentFile().mkdirs();
 				FileWriter wp = new FileWriter(f);
@@ -47,6 +49,7 @@ public class Crawler {
 				wp.close();
 			}
 			link.close();
+			page.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

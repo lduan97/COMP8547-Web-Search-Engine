@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StopWords {
-	public static ArrayList<String> removeStopWords(String query) {
+	public ArrayList<String> removeStopWords(String query) {
+		
 		ArrayList<String> allWords = null;
 		try {
 			Scanner s = new Scanner(new File("StopWords.txt"));
@@ -21,5 +22,6 @@ public class StopWords {
 			e.printStackTrace();
 		}
 	    return allWords;
+	    
 	}
 }
