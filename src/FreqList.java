@@ -12,17 +12,18 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class FreqList {
-	
+
 	HashMap<String, Integer> freqList;
 	LinkedHashMap<String, String> originList;
-	
+	protected static boolean hasResults = true;
+
 	public FreqList() {
 		this.freqList = new HashMap<>();
 		this.originList = new LinkedHashMap<>();
 	}
-	
+
 	public void getFreqList(ArrayList<String> query) throws FileNotFoundException {
-		
+
 		File folder = new File("..\\Web Search Engine\\Web Pages");
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
@@ -40,8 +41,7 @@ public class FreqList {
 					String token = stk.nextToken().toLowerCase();
 					if (st.contains(token)) {
 						st.put(token, st.get(token) + 1);
-					} 
-					else {
+					} else {
 						st.put(token, 1);
 					}
 				}
@@ -58,14 +58,14 @@ public class FreqList {
 //			System.out.println(entry.getKey() + "\n" + entry.getValue() + "\n");
 //		});
 	}
-	
-	public LinkedHashMap<String, String> sortList(int numResult) throws FileNotFoundException {
-		
+
+	public LinkedHashMap<String, String> sortList(int numResult, int multiplier) throws FileNotFoundException {
+
 		ArrayList<Integer> list = new ArrayList<>();
-        LinkedHashMap<String, Integer> sortedFreqList = new LinkedHashMap<>();
-        ArrayList<String> webpage = new ArrayList<>();
-        ArrayList<String> url = new ArrayList<>();
-        LinkedHashMap<String, String> completeList = new LinkedHashMap<>();
+		LinkedHashMap<String, Integer> sortedFreqList = new LinkedHashMap<>();
+		ArrayList<String> webpage = new ArrayList<>();
+		ArrayList<String> url = new ArrayList<>();
+		LinkedHashMap<String, String> completeList = new LinkedHashMap<>();
 		for (Map.Entry<String, Integer> entry : freqList.entrySet()) {
 			list.add(entry.getValue());
 		}
@@ -88,15 +88,22 @@ public class FreqList {
 		for (String page : webpage) {
 			url.add(originList.get(page));
 		}
-		Iterator<String> itr = webpage.listIterator();
-		for (int i = 0; i < numResult; i++) {
-			if (itr.hasNext()) {
-				completeList.put(url.get(i), itr.next());
+		int upperBound = numResult * (multiplier + 1);
+		if (upperBound <= webpage.size()) {
+			for (int i = numResult * multiplier; i < upperBound; i++) {
+				completeList.put(url.get(i), webpage.get(i));
 			}
+		} else {
+			for (int i = numResult * multiplier; i < webpage.size(); i++) {
+				completeList.put(url.get(i), webpage.get(i));
+			}
+		}
+		if (completeList.isEmpty()) {
+			hasResults = false;
 		}
 		return completeList;
 	}
-	
+
 	private void getOriginList() throws FileNotFoundException {
 
 		ArrayList<String> pageList = new ArrayList<>();
