@@ -1,3 +1,4 @@
+package searchengine;
 import java.util.ArrayList;
 import org.tartarus.snowball.ext.englishStemmer;
 

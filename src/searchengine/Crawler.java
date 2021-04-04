@@ -1,3 +1,4 @@
+package searchengine;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class Crawler {
 			Document document;
 			try {
 				document = connect(url).timeout(5000).get();
-
+				//Get 500 URLs starting from designated website
 				Elements links = document.select("a[href^=\"https://www.cbc.ca/news\"]");
 				for (Element link : links) {
 					if (urls.size() < 500) {
@@ -35,12 +36,15 @@ public class Crawler {
 		try {
 			FileWriter link = new FileWriter("URLs.txt");
 			FileWriter page = new FileWriter("Pages.txt");
+			//From the crawled URLs to get web page content
 			for (String url : urls) {
 				Document document;
 				document = connect(url).timeout(5000).maxBodySize(0).get();
+				//Save web page content by using page title as the file name
 				String fileName = document.title().replace(" | CBC News", "").replaceAll("[^A-Za-z0-9\\s]", "")
 						+ ".txt";
 				page.write(fileName + System.getProperty("line.separator"));
+				//Save files into a folder
 				File f = new File("..\\Web Search Engine\\Web Pages\\" + fileName);
 				f.getParentFile().mkdirs();
 				FileWriter wp = new FileWriter(f);
