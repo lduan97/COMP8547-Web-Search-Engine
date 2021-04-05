@@ -63,20 +63,22 @@ public class Driver {
 					System.out.println("Would you like to see the next page? Y/N\n");
 					nextResults = s.nextLine();
 					System.out.println();
-					if (nextResults.equals("Y")) {
+					if (nextResults.toLowerCase().equals("y")) {
 						multiplier++;
 						pageNumber++;
 					}
 				} else {
-					System.out.println("\nNo more results found\n");
+					System.out.println("No more results found\n");
 					nextResults = "N";
 				}
-			} while (nextResults.equals("Y"));
+			} while (nextResults.toLowerCase().equals("y"));
 			System.out.println("To continue search type 1. Otherwise, type 2 to EXIT\n");
 			choice = s.nextLine();
 			System.out.println();
 			if (choice.equals("1")) {
 				pageNumber = 1;
+				multiplier = 0;
+				FreqList.hasResults = true;
 			}
 		} while (choice.equals("1"));
 		s.close();
