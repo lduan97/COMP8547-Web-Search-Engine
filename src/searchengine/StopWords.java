@@ -7,6 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StopWords {
+	
+	/**
+	 * This method will be used to remove stop words
+	 * @param query User's input
+	 * @return A list does not contain stop words
+	 */
 	public ArrayList<String> removeStopWords(String query) {
 		
 		ArrayList<String> allWords = null;

@@ -12,7 +12,11 @@ import static org.jsoup.Jsoup.*;
 
 public class Crawler {
 	private static HashSet<String> urls = new HashSet<>();
-
+	
+	/**
+	 * This method intends to retrieve all available URLs from given root URL
+	 * @param url Root URL
+	 */
 	public static void getURLs(String url) {
 		if (!urls.contains(url)) {
 			Document document;
@@ -31,7 +35,10 @@ public class Crawler {
 			}
 		}
 	}
-
+	
+	/**
+	 * This method will translate all contents in web page to txt file
+	 */
 	public static void getContent() {
 		try {
 			FileWriter link = new FileWriter("URLs.txt");

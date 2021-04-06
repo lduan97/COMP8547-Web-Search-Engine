@@ -50,7 +50,7 @@ public class Driver {
 //				}
 				// get input words frequency
 				FreqList f = new FreqList();
-				f.getFreqList(inputStem);
+				f.getWordFreqList(inputStem);
 				// sort results
 				LinkedHashMap<String, String> sortedResults = f.sortList(numResults, multiplier);
 				if (FreqList.hasResults) {
@@ -75,6 +75,7 @@ public class Driver {
 			System.out.println("To continue search type 1. Otherwise, type 2 to EXIT\n");
 			choice = s.nextLine();
 			System.out.println();
+			//reset the attributes of search engine
 			if (choice.equals("1")) {
 				pageNumber = 1;
 				multiplier = 0;

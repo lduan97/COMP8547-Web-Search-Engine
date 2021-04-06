@@ -22,8 +22,12 @@ public class FreqList {
 		this.freqList = new HashMap<>();
 		this.originList = new LinkedHashMap<>();
 	}
-
-	public void getFreqList(ArrayList<String> query) throws FileNotFoundException {
+	/**
+	 * This method will be able to make statistic for the word frequency
+	 * @param query User's input
+	 * @throws FileNotFoundException
+	 */
+	public void getWordFreqList(ArrayList<String> query) throws FileNotFoundException {
 
 		File folder = new File("..\\Web Search Engine\\Web Pages");
 		File[] listOfFiles = folder.listFiles();
@@ -65,7 +69,14 @@ public class FreqList {
 //			System.out.println(entry.getKey() + "\n" + entry.getValue() + "\n");
 //		});
 	}
-
+	
+	/**
+	 * 
+	 * @param numResult How many results user would like to see in one page
+	 * @param multiplier Iterate the sorted list to get next page results
+	 * @return The sorted list contains URLs and web pages
+	 * @throws FileNotFoundException
+	 */
 	public LinkedHashMap<String, String> sortList(int numResult, int multiplier) throws FileNotFoundException {
 
 		ArrayList<Integer> list = new ArrayList<>();
@@ -117,6 +128,10 @@ public class FreqList {
 		return completeList;
 	}
 
+	/**
+	 * This method is to get a list which combines unsorted the URLs and web pages
+	 * @throws FileNotFoundException
+	 */
 	private void getOriginList() throws FileNotFoundException {
 
 		ArrayList<String> pageList = new ArrayList<>();
